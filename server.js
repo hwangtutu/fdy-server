@@ -59,8 +59,14 @@ app.get('/naver-shopping', async (req, res) => {
   }
 
   // Use environment variables for Naver API credentials
-  const clientId = process.env.yI26XG835rAWVaR5gUmd;
-  const clientSecret = process.env.qNdFGK0CCn;
+  const clientId = process.env.NAVER_CLIENT_ID;
+  const clientSecret = process.env.NAVER_CLIENT_SECRET;
+
+  if (!clientId || !clientSecret) {
+  console.error('Naver API credentials are missing');
+  res.status(500).json({ error: 'Naver API credentials are missing' });
+  return;
+  }
   const displayPerPage = 100; 
   const maxResults = 1000; 
 
